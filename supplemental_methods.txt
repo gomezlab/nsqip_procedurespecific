@@ -1,0 +1,8 @@
+Supplemental Methods
+Data files from the NSQIP website were first converted from (.txt) to (.csv) files using Microsoft Excel. Procedure specific and general participant user files were then merged using the Pandas library in Python on ‘CASEID’. A BMI column was generated from the height and weight columns. Patients in the colectomy dataset undergoing concurrent colostomy placement were identified using the CPT codes (44187, 44188, 44141, 44143, 44144, 44146, 44150, 44151, 44206, 44208, 44210, 44187, 44188, 44320, 44310). Patients in the pancreatectomy dataset undergoing Whipple were identified using codes 48150 and 48153. Patients >90 years old were recoded as age 91. Further variable pre-processing steps (condensing categories) for specific procedures are described in the code markdown.
+
+Cross-validation folds were created using the StratifiedKFold function from SciKitLearn, which ensures the same proportion of positive events for the outcome variable are included in each fold. 
+
+Neural network (NN) models were developed using Tensorflow’s Keras (version 2.7.0) and SciKitLearn (version 24.2). NN models consisted of dense layers, followed by batch normalization and dropout. The number of layers, neurons per layer, amount of dropout, and learning rate was tuned using RandomizedSearchCV from SciKitLearn. Logistic regression was implemented with no regularization, which is the approach used by most statistical software.
+
+Training was performed using a batch size of 512. Early stopping was used with a minimum change in validation loss between epochs of 1x10-6 and a patience of 25 epochs. Training was performed using a NVIDIA Tesla Titan V GPU with 12GB of VRAM.
